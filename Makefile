@@ -1,10 +1,10 @@
 .PHONY: build run attach
 
 build:
-	docker build -t coscan --build-arg myuser=${shell whoami} .
+	docker build -t mrcoord --build-arg myuser=${shell whoami} .
 
 run:
-	docker run -it --name coscan\
+	docker run --rm -it --name mrcoord\
 		--cap-add=SYS_PTRACE --security-opt seccomp=unconfined \
 			--gpus all \
 			-e DISPLAY=${DISPLAY} \
@@ -17,7 +17,7 @@ run:
 			-v ${HOME}/Workspace/mrslam/coscan_ws:${HOME}/Workspace/mrslam/coscan_ws/ \
 			-v /etc/localtime:/etc/localtime \
 			--runtime=nvidia \
-			coscan
+			mrcood
 
 attach:
-	docker exec -it -u ${shell whoami} coscan /bin/bash
+	docker exec -it -u ${shell whoami} mrcood /bin/bash
